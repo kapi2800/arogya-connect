@@ -3,107 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arogya Connect - Disease Prediction</title>
+    <title>Arogya Connect - Smart Hospital Management</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-stethoscope"></i> Arogya Connect
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/prediction" class="nav-link"><i class="fas fa-brain"></i> AI Prediction</a></li>
+                <li><a href="/appointments" class="nav-link"><i class="fas fa-calendar-plus"></i> Book Appointment</a></li>
+                <li><a href="/doctors" class="nav-link"><i class="fas fa-user-md"></i> Our Doctors</a></li>
+            </ul>
+        </nav>
+
         <header>
-            <h1><i class="fas fa-stethoscope"></i> Arogya Connect</h1>
-            <p class="subtitle">AI-Powered Disease Prediction System</p>
+            <h1><i class="fas fa-hospital"></i> Welcome to Arogya Connect</h1>
+            <p class="subtitle">Smart Hospital Management with AI-Powered Healthcare</p>
         </header>
 
         <main>
-            <div class="card">
-                <h2><i class="fas fa-clipboard-list"></i> Select Your Symptoms</h2>
-                <p class="description">
-                    Please select the symptoms you are experiencing. Our AI system will analyze your symptoms 
-                    and provide possible disease predictions to help guide your healthcare decisions.
-                </p>
-
-                {% if error %}
-                <div class="alert alert-error">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    {{ error }}
-                </div>
-                {% endif %}
-
-                <form method="POST" action="/predict" id="symptomForm">
-                    <div class="symptoms-grid">
-                        {% for symptom in symptoms %}
-                        <label class="symptom-checkbox">
-                            <input type="checkbox" name="symptoms" value="{{ symptom }}">
-                            <span class="checkmark"></span>
-                            <span class="symptom-text">{{ symptom|title|replace('_', ' ') }}</span>
-                        </label>
-                        {% endfor %}
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-search"></i>
-                            Get Prediction
-                        </button>
-                        <button type="button" class="btn btn-secondary" onclick="clearSelection()">
-                            <i class="fas fa-eraser"></i>
-                            Clear All
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="info-section">
-                <div class="info-card">
-                    <h3><i class="fas fa-info-circle"></i> How It Works</h3>
-                    <ol>
-                        <li>Select the symptoms you are experiencing from the list above</li>
-                        <li>Click "Get Prediction" to analyze your symptoms</li>
-                        <li>Review the AI-generated disease predictions</li>
-                        <li>Consult with a healthcare professional for proper diagnosis</li>
-                    </ol>
-                </div>
-
-                <div class="info-card">
-                    <h3><i class="fas fa-exclamation-triangle"></i> Important Disclaimer</h3>
-                    <p>
-                        This tool is for educational and informational purposes only. 
-                        It should not replace professional medical advice, diagnosis, or treatment. 
-                        Always consult with qualified healthcare professionals for medical concerns.
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h2><i class="fas fa-brain"></i> AI-Powered Disease Prediction</h2>
+                    <p class="hero-description">
+                        Our advanced machine learning system can predict diseases based on symptoms. 
+                        Using ensemble methods with Random Forest and Naive Bayes models, we provide 
+                        accurate preliminary health assessments.
                     </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">10</div>
+                            <div class="stat-label">Symptoms Analyzed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">32</div>
+                            <div class="stat-label">Diseases Predicted</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">AI Models</div>
+                        </div>
+                    </div>
+                    <a href="/prediction" class="btn btn-hero">
+                        <i class="fas fa-rocket"></i>
+                        Try AI Prediction
+                    </a>
                 </div>
-            </div>
+            </section>
+
+            <!-- Services Section -->
+            <section class="services-section">
+                <h2><i class="fas fa-hospital-alt"></i> Our Hospital Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI Disease Prediction</h3>
+                        <p>Get instant disease predictions using our advanced machine learning models trained on medical data.</p>
+                        <a href="/prediction" class="btn btn-service">Learn More</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-calendar-plus"></i>
+                        </div>
+                        <h3>Online Appointments</h3>
+                        <p>Book appointments with our specialist doctors easily through our online booking system.</p>
+                        <a href="/appointments" class="btn btn-service">Book Now</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3>Expert Doctors</h3>
+                        <p>Meet our team of experienced doctors specializing in various medical fields.</p>
+                        <a href="/doctors" class="btn btn-service">View Doctors</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ML Model Information -->
+            <section class="ml-info-section">
+                <div class="card">
+                    <h2><i class="fas fa-cogs"></i> How Our AI Works</h2>
+                    <div class="ml-explanation">
+                        <div class="ml-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Symptom Analysis</h4>
+                                <p>Input your symptoms through our user-friendly interface</p>
+                            </div>
+                        </div>
+                        <div class="ml-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>AI Processing</h4>
+                                <p>Two ML models (Random Forest & Naive Bayes) analyze the data</p>
+                            </div>
+                        </div>
+                        <div class="ml-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Prediction Results</h4>
+                                <p>Get accurate disease predictions with confidence scores</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer>
-            <p>&copy; 2024 Arogya Connect. Powered by Machine Learning.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-hospital"></i> Arogya Connect</h4>
+                    <p>Smart healthcare with AI-powered disease prediction</p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-clock"></i> Emergency</h4>
+                    <p>24/7 Emergency Services</p>
+                    <p><strong>Call: 108</strong></p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-envelope"></i> Contact</h4>
+                    <p>info@arogyaconnect.com</p>
+                    <p>+91-123-456-7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Arogya Connect. Powered by Machine Learning.</p>
+            </div>
         </footer>
     </div>
 
     <script>
-        function clearSelection() {
-            const checkboxes = document.querySelectorAll('input[name="symptoms"]');
-            checkboxes.forEach(checkbox => checkbox.checked = false);
-        }
-
-        // Form validation
-        document.getElementById('symptomForm').addEventListener('submit', function(e) {
-            const checkboxes = document.querySelectorAll('input[name="symptoms"]:checked');
-            if (checkboxes.length === 0) {
-                e.preventDefault();
-                alert('Please select at least one symptom before getting a prediction.');
-            }
+        // Simple navigation highlight
+        document.addEventListener('DOMContentLoaded', function() {
+            // Highlight current page in navigation
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
         });
 
-        // Add visual feedback for selected symptoms
-        document.querySelectorAll('input[name="symptoms"]').forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const label = this.closest('.symptom-checkbox');
-                if (this.checked) {
-                    label.classList.add('selected');
-                } else {
-                    label.classList.remove('selected');
-                }
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     </script>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - Arogya Connect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-stethoscope"></i> Arogya Connect
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/prediction" class="nav-link"><i class="fas fa-brain"></i> AI Prediction</a></li>
+                <li><a href="/appointments" class="nav-link active"><i class="fas fa-calendar-plus"></i> Book Appointment</a></li>
+                <li><a href="/doctors" class="nav-link"><i class="fas fa-user-md"></i> Our Doctors</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1><i class="fas fa-calendar-plus"></i> Book an Appointment</h1>
+            <p class="subtitle">Schedule your visit with our expert doctors</p>
+        </header>
+
+        <main>
+            <div class="appointments-container">
+                <!-- Appointment Form -->
+                <div class="card appointment-form">
+                    <h2><i class="fas fa-user-plus"></i> Patient Information</h2>
+                    
+                    <div id="success-message" class="alert alert-success" style="display: none;">
+                        <i class="fas fa-check-circle"></i>
+                        Appointment booked successfully! We will contact you to confirm.
+                    </div>
+
+                    <form id="appointmentForm">
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-user"></i> Personal Details</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="age">Age *</label>
+                                    <input type="number" id="age" name="age" min="1" max="120" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Gender *</label>
+                                    <select id="gender" name="gender" required>
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Appointment Details -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-calendar-alt"></i> Appointment Details</h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="department">Department *</label>
+                                    <select id="department" name="department" required>
+                                        <option value="">Select Department</option>
+                                        <option value="general">General Medicine</option>
+                                        <option value="cardiology">Cardiology</option>
+                                        <option value="neurology">Neurology</option>
+                                        <option value="orthopedics">Orthopedics</option>
+                                        <option value="dermatology">Dermatology</option>
+                                        <option value="pediatrics">Pediatrics</option>
+                                        <option value="psychiatry">Psychiatry</option>
+                                        <option value="emergency">Emergency</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="doctor">Preferred Doctor</label>
+                                    <select id="doctor" name="doctor">
+                                        <option value="">Any Available Doctor</option>
+                                        <option value="dr-sharma">Dr. Rajesh Sharma</option>
+                                        <option value="dr-patel">Dr. Priya Patel</option>
+                                        <option value="dr-kumar">Dr. Amit Kumar</option>
+                                        <option value="dr-singh">Dr. Neha Singh</option>
+                                        <option value="dr-gupta">Dr. Vikram Gupta</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="appointmentDate">Preferred Date *</label>
+                                    <input type="date" id="appointmentDate" name="appointmentDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="appointmentTime">Preferred Time *</label>
+                                    <select id="appointmentTime" name="appointmentTime" required>
+                                        <option value="">Select Time</option>
+                                        <option value="09:00">09:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="14:00">02:00 PM</option>
+                                        <option value="15:00">03:00 PM</option>
+                                        <option value="16:00">04:00 PM</option>
+                                        <option value="17:00">05:00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reason">Reason for Visit *</label>
+                                <textarea id="reason" name="reason" rows="3" placeholder="Briefly describe your symptoms or reason for the visit" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="notes">Additional Notes</label>
+                                <textarea id="notes" name="notes" rows="2" placeholder="Any additional information or special requests"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-calendar-check"></i>
+                                Book Appointment
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fas fa-undo"></i>
+                                Reset Form
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Appointment Info -->
+                <div class="appointment-info">
+                    <div class="info-card">
+                        <h3><i class="fas fa-clock"></i> Hospital Hours</h3>
+                        <div class="hours-info">
+                            <div class="hours-item">
+                                <strong>Monday - Friday:</strong> 8:00 AM - 8:00 PM
+                            </div>
+                            <div class="hours-item">
+                                <strong>Saturday:</strong> 9:00 AM - 6:00 PM
+                            </div>
+                            <div class="hours-item">
+                                <strong>Sunday:</strong> 10:00 AM - 4:00 PM
+                            </div>
+                            <div class="hours-item emergency">
+                                <strong>Emergency:</strong> 24/7 Available
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3><i class="fas fa-info-circle"></i> Appointment Guidelines</h3>
+                        <ul>
+                            <li>Arrive 15 minutes before your appointment</li>
+                            <li>Bring valid ID and insurance card</li>
+                            <li>List of current medications</li>
+                            <li>Previous medical records if available</li>
+                            <li>Emergency cases will be prioritized</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3><i class="fas fa-phone"></i> Contact Information</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>General Enquiry: +91-123-456-7890</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Emergency: 108</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>appointments@arogyaconnect.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-hospital"></i> Arogya Connect</h4>
+                    <p>Smart healthcare with AI-powered disease prediction</p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-clock"></i> Emergency</h4>
+                    <p>24/7 Emergency Services</p>
+                    <p><strong>Call: 108</strong></p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-envelope"></i> Contact</h4>
+                    <p>info@arogyaconnect.com</p>
+                    <p>+91-123-456-7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Arogya Connect. Powered by Machine Learning.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Set minimum date to today
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('appointmentDate').min = today;
+
+            // Navigation highlighting
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+
+        // Form submission handler
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic form validation
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('error');
+                } else {
+                    field.classList.remove('error');
+                }
+            });
+            
+            if (!isValid) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Booking...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                // Show success message
+                document.getElementById('success-message').style.display = 'block';
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // Scroll to success message
+                document.getElementById('success-message').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('success-message').style.display = 'none';
+                }, 5000);
+                
+            }, 2000);
+        });
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 10) {
+                value = value.substring(0, 10);
+            }
+            e.target.value = value;
+        });
+
+        // Department-based doctor filtering (simple example)
+        document.getElementById('department').addEventListener('change', function() {
+            const doctorSelect = document.getElementById('doctor');
+            const department = this.value;
+            
+            // Clear current options except the first one
+            doctorSelect.innerHTML = '<option value="">Any Available Doctor</option>';
+            
+            // Add relevant doctors based on department
+            const doctors = {
+                'general': ['Dr. Rajesh Sharma', 'Dr. Priya Patel'],
+                'cardiology': ['Dr. Amit Kumar'],
+                'neurology': ['Dr. Neha Singh'],
+                'orthopedics': ['Dr. Vikram Gupta'],
+                'dermatology': ['Dr. Priya Patel'],
+                'pediatrics': ['Dr. Neha Singh'],
+                'psychiatry': ['Dr. Rajesh Sharma'],
+                'emergency': ['Dr. Amit Kumar', 'Dr. Vikram Gupta']
+            };
+            
+            if (doctors[department]) {
+                doctors[department].forEach(doctor => {
+                    const option = document.createElement('option');
+                    option.value = doctor.toLowerCase().replace(/\s+/g, '-').replace('dr-', '');
+                    option.textContent = doctor;
+                    doctorSelect.appendChild(option);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

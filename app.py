@@ -88,8 +88,26 @@ def predict_disease_from_symptoms(selected_symptoms):
 
 @app.route('/')
 def index():
-    """Main page with symptom selection"""
-    return render_template('index.html', symptoms=AVAILABLE_SYMPTOMS)
+    """Main homepage highlighting ML project and services"""
+    return render_template('index.html')
+
+
+@app.route('/prediction')
+def prediction():
+    """Disease prediction page with symptom selection"""
+    return render_template('prediction.html', symptoms=AVAILABLE_SYMPTOMS)
+
+
+@app.route('/appointments')
+def appointments():
+    """Appointment booking page"""
+    return render_template('appointments.html')
+
+
+@app.route('/doctors')
+def doctors():
+    """Doctors information page"""
+    return render_template('doctors.html')
 
 
 @app.route('/predict', methods=['POST'])
@@ -103,14 +121,14 @@ def predict():
         result = predict_disease_from_symptoms(selected_symptoms)
         
         if 'error' in result:
-            return render_template('index.html', 
+            return render_template('prediction.html', 
                                  symptoms=AVAILABLE_SYMPTOMS, 
                                  error=result['error'])
         
         return render_template('result.html', result=result)
         
     except Exception as e:
-        return render_template('index.html', 
+        return render_template('prediction.html', 
                              symptoms=AVAILABLE_SYMPTOMS, 
                              error=f"An error occurred: {str(e)}")
 
