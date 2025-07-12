@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arogya Connect - Disease Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-stethoscope"></i> Arogya Connect</h1>
+            <p class="subtitle">AI-Powered Disease Prediction System</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2><i class="fas fa-clipboard-list"></i> Select Your Symptoms</h2>
+                <p class="description">
+                    Please select the symptoms you are experiencing. Our AI system will analyze your symptoms 
+                    and provide possible disease predictions to help guide your healthcare decisions.
+                </p>
+
+                {% if error %}
+                <div class="alert alert-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form method="POST" action="/predict" id="symptomForm">
+                    <div class="symptoms-grid">
+                        {% for symptom in symptoms %}
+                        <label class="symptom-checkbox">
+                            <input type="checkbox" name="symptoms" value="{{ symptom }}">
+                            <span class="checkmark"></span>
+                            <span class="symptom-text">{{ symptom|title|replace('_', ' ') }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                            Get Prediction
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearSelection()">
+                            <i class="fas fa-eraser"></i>
+                            Clear All
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="info-section">
+                <div class="info-card">
+                    <h3><i class="fas fa-info-circle"></i> How It Works</h3>
+                    <ol>
+                        <li>Select the symptoms you are experiencing from the list above</li>
+                        <li>Click "Get Prediction" to analyze your symptoms</li>
+                        <li>Review the AI-generated disease predictions</li>
+                        <li>Consult with a healthcare professional for proper diagnosis</li>
+                    </ol>
+                </div>
+
+                <div class="info-card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Important Disclaimer</h3>
+                    <p>
+                        This tool is for educational and informational purposes only. 
+                        It should not replace professional medical advice, diagnosis, or treatment. 
+                        Always consult with qualified healthcare professionals for medical concerns.
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Arogya Connect. Powered by Machine Learning.</p>
+        </footer>
+    </div>
+
+    <script>
+        function clearSelection() {
+            const checkboxes = document.querySelectorAll('input[name="symptoms"]');
+            checkboxes.forEach(checkbox => checkbox.checked = false);
+        }
+
+        // Form validation
+        document.getElementById('symptomForm').addEventListener('submit', function(e) {
+            const checkboxes = document.querySelectorAll('input[name="symptoms"]:checked');
+            if (checkboxes.length === 0) {
+                e.preventDefault();
+                alert('Please select at least one symptom before getting a prediction.');
+            }
+        });
+
+        // Add visual feedback for selected symptoms
+        document.querySelectorAll('input[name="symptoms"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const label = this.closest('.symptom-checkbox');
+                if (this.checked) {
+                    label.classList.add('selected');
+                } else {
+                    label.classList.remove('selected');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
