@@ -57,6 +57,45 @@ function showDoctorProfile(doctorId) {
                 'Expert in pediatric dermatology'
             ],
             languages: 'English, Hindi, Marathi'
+        },
+        'dr-kumar': {
+            name: 'Dr. Amit Kumar',
+            specialization: 'Cardiology',
+            education: 'MBBS from AIIMS Delhi, MD Cardiology from PGI Chandigarh',
+            experience: '18+ years of experience in advanced cardiac care and interventional cardiology',
+            achievements: [
+                'Performed 500+ cardiac interventions',
+                'Expert in minimally invasive heart surgery',
+                'Published 30+ research papers on cardiology',
+                'Member of Cardiological Society of India'
+            ],
+            languages: 'English, Hindi'
+        },
+        'dr-singh': {
+            name: 'Dr. Neha Singh',
+            specialization: 'Neurology & Pediatrics',
+            education: 'MBBS from King George Medical University, MD Neurology from SGPGIMS',
+            experience: '10+ years specializing in neurological disorders in children and adults',
+            achievements: [
+                'Expert in pediatric neurology',
+                'Certified in EEG and EMG procedures',
+                'Award for excellence in neurological care',
+                'Regular contributor to medical journals'
+            ],
+            languages: 'English, Hindi, Bengali'
+        },
+        'dr-gupta': {
+            name: 'Dr. Vikram Gupta',
+            specialization: 'Orthopedics',
+            education: 'MBBS from MAULANA AZAD Medical College, MS Orthopedics from AIIMS',
+            experience: '14+ years in orthopedic surgery and sports medicine',
+            achievements: [
+                'Expert in joint replacement surgery',
+                'Specialized in sports injury treatment',
+                'Performed 200+ successful joint surgeries',
+                'Member of Indian Orthopedic Association'
+            ],
+            languages: 'English, Hindi, Punjabi'
         }
     };
     

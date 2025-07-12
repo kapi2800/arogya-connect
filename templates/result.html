@@ -9,30 +9,178 @@
 </head>
 <body>
     <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-stethoscope"></i> Arogya Connect
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/prediction" class="nav-link"><i class="fas fa-brain"></i> AI Prediction</a></li>
+                <li><a href="/appointments" class="nav-link"><i class="fas fa-calendar-plus"></i> Book Appointment</a></li>
+                <li><a href="/doctors" class="nav-link"><i class="fas fa-user-md"></i> Our Doctors</a></li>
+            </ul>
+        </nav>
+        
         <header>
-            <h1><i class="fas fa-stethoscope"></i> Arogya Connect</h1>
-            <p class="subtitle">AI-Powered Disease Prediction Results</p>
+            <h1><i class="fas fa-chart-line"></i> Prediction Results</h1>
+            <p class="subtitle">AI-Powered Disease Prediction Analysis</p>
         </header>
 
         <main>
-            <!-- ...content unchanged... -->
+            <!-- Results Section -->
+            <section class="results-section">
+                <div class="card">
+                    <h2><i class="fas fa-brain"></i> AI Prediction Results</h2>
+                    
+                    <!-- Selected Symptoms -->
+                    <div class="result-section">
+                        <h3><i class="fas fa-list-check"></i> Selected Symptoms</h3>
+                        <div class="symptoms-display">
+                            {% for symptom in result.selected_symptoms %}
+                            <span class="symptom-tag">
+                                <i class="fas fa-check"></i>
+                                {{ symptom.replace('_', ' ').title() }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Model Predictions -->
+                    <div class="result-section">
+                        <h3><i class="fas fa-robot"></i> Model Predictions</h3>
+                        <div class="predictions-grid">
+                            <div class="prediction-item">
+                                <div class="prediction-header">
+                                    <i class="fas fa-tree"></i>
+                                    <h4>Random Forest Model</h4>
+                                </div>
+                                <div class="prediction-result">
+                                    {{ result.predictions.random_forest }}
+                                </div>
+                            </div>
+                            
+                            <div class="prediction-item">
+                                <div class="prediction-header">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <h4>Naive Bayes Model</h4>
+                                </div>
+                                <div class="prediction-result">
+                                    {{ result.predictions.naive_bayes }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final Prediction -->
+                    <div class="result-section final-prediction">
+                        <h3><i class="fas fa-bullseye"></i> Final AI Prediction</h3>
+                        <div class="final-result">
+                            <div class="result-icon">
+                                <i class="fas fa-diagnosis"></i>
+                            </div>
+                            <div class="result-content">
+                                <h4>{{ result.predictions.final_prediction }}</h4>
+                                <p class="result-description">
+                                    Based on ensemble analysis of multiple AI models
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medical Disclaimer -->
+                    <div class="result-section disclaimer">
+                        <div class="disclaimer-box">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="disclaimer-content">
+                                <h4>Important Medical Disclaimer</h4>
+                                <p>This AI prediction is for informational purposes only and should not replace professional medical advice. Please consult with a qualified healthcare provider for proper diagnosis and treatment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommended Actions -->
+            <section class="recommendations-section">
+                <div class="card">
+                    <h2><i class="fas fa-lightbulb"></i> Recommended Next Steps</h2>
+                    <div class="recommendations-grid">
+                        <div class="recommendation-item">
+                            <div class="recommendation-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="recommendation-content">
+                                <h3>Consult a Doctor</h3>
+                                <p>Schedule an appointment with one of our qualified physicians for proper diagnosis.</p>
+                                <a href="/appointments" class="btn btn-primary">Book Appointment</a>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-item">
+                            <div class="recommendation-icon">
+                                <i class="fas fa-hospital"></i>
+                            </div>
+                            <div class="recommendation-content">
+                                <h3>Visit Hospital</h3>
+                                <p>For serious symptoms, visit our emergency department or call emergency services.</p>
+                                <div class="emergency-contact">
+                                    <strong>Emergency: 108</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-item">
+                            <div class="recommendation-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="recommendation-content">
+                                <h3>New Prediction</h3>
+                                <p>If your symptoms change, run a new AI prediction for updated analysis.</p>
+                                <a href="/prediction" class="btn btn-secondary">Try Again</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <!-- Action Buttons -->
             <div class="form-actions">
-                <a href="/" class="btn btn-primary">
+                <a href="/prediction" class="btn btn-primary">
                     <i class="fas fa-redo"></i>
                     New Prediction
+                </a>
+                <a href="/appointments" class="btn btn-outline">
+                    <i class="fas fa-calendar-plus"></i>
+                    Book Appointment
                 </a>
                 <button id="printResultsBtn" class="btn btn-secondary">
                     <i class="fas fa-print"></i>
                     Print Results
                 </button>
             </div>
-            <!-- ...other content unchanged... -->
         </main>
 
         <footer>
-            <p>&copy; 2024 Arogya Connect. Powered by Machine Learning.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-hospital"></i> Arogya Connect</h4>
+                    <p>Smart healthcare with AI-powered disease prediction</p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-clock"></i> Emergency</h4>
+                    <p>24/7 Emergency Services</p>
+                    <p><strong>Call: 108</strong></p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-envelope"></i> Contact</h4>
+                    <p>info@arogyaconnect.com</p>
+                    <p>+91-123-456-7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Arogya Connect. Powered by Machine Learning.</p>
+            </div>
         </footer>
     </div>
 

@@ -10,10 +10,243 @@
 <body>
     <div class="container">
         <!-- Navigation Bar -->
-        <!-- ...content unchanged... -->
-        <!-- main content unchanged ... -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-stethoscope"></i> Arogya Connect
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/prediction" class="nav-link"><i class="fas fa-brain"></i> AI Prediction</a></li>
+                <li><a href="/appointments" class="nav-link"><i class="fas fa-calendar-plus"></i> Book Appointment</a></li>
+                <li><a href="/doctors" class="nav-link active"><i class="fas fa-user-md"></i> Our Doctors</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h1><i class="fas fa-user-md"></i> Meet Our Doctors</h1>
+            <p class="subtitle">Expert healthcare professionals at your service</p>
+        </header>
+
+        <main>
+            <!-- Doctor Filter Section -->
+            <section class="filter-section">
+                <h2><i class="fas fa-filter"></i> Filter by Department</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-department="all">All Doctors</button>
+                    <button class="filter-btn" data-department="general">General Medicine</button>
+                    <button class="filter-btn" data-department="cardiology">Cardiology</button>
+                    <button class="filter-btn" data-department="neurology">Neurology</button>
+                    <button class="filter-btn" data-department="orthopedics">Orthopedics</button>
+                    <button class="filter-btn" data-department="dermatology">Dermatology</button>
+                    <button class="filter-btn" data-department="pediatrics">Pediatrics</button>
+                </div>
+            </section>
+
+            <!-- Doctors Grid -->
+            <section class="doctors-section">
+                <div class="doctors-grid">
+                    <!-- Doctor 1 -->
+                    <div class="doctor-card" data-department="general,cardiology">
+                        <div class="doctor-image">
+                            <i class="fas fa-user-doctor"></i>
+                        </div>
+                        <div class="doctor-info">
+                            <h3>Dr. Rajesh Sharma</h3>
+                            <p class="specialization">General Medicine & Cardiology</p>
+                            <p class="experience">15+ years experience</p>
+                            <div class="doctor-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>MBBS, MD Internal Medicine</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Mon-Fri: 9:00 AM - 5:00 PM</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-language"></i>
+                                    <span>English, Hindi, Gujarati</span>
+                                </div>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-primary" onclick="showDoctorProfile('dr-sharma')">
+                                    <i class="fas fa-user"></i> View Profile
+                                </button>
+                                <a href="/appointments" class="btn btn-secondary">
+                                    <i class="fas fa-calendar-plus"></i> Book Appointment
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 2 -->
+                    <div class="doctor-card" data-department="general,dermatology">
+                        <div class="doctor-image">
+                            <i class="fas fa-user-doctor"></i>
+                        </div>
+                        <div class="doctor-info">
+                            <h3>Dr. Priya Patel</h3>
+                            <p class="specialization">General Medicine & Dermatology</p>
+                            <p class="experience">12+ years experience</p>
+                            <div class="doctor-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>MBBS, MD Dermatology</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Mon-Sat: 10:00 AM - 6:00 PM</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-language"></i>
+                                    <span>English, Hindi, Marathi</span>
+                                </div>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-primary" onclick="showDoctorProfile('dr-patel')">
+                                    <i class="fas fa-user"></i> View Profile
+                                </button>
+                                <a href="/appointments" class="btn btn-secondary">
+                                    <i class="fas fa-calendar-plus"></i> Book Appointment
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 3 -->
+                    <div class="doctor-card" data-department="cardiology">
+                        <div class="doctor-image">
+                            <i class="fas fa-user-doctor"></i>
+                        </div>
+                        <div class="doctor-info">
+                            <h3>Dr. Amit Kumar</h3>
+                            <p class="specialization">Cardiology</p>
+                            <p class="experience">18+ years experience</p>
+                            <div class="doctor-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>MBBS, MD Cardiology</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Mon-Fri: 8:00 AM - 4:00 PM</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-language"></i>
+                                    <span>English, Hindi</span>
+                                </div>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-primary" onclick="showDoctorProfile('dr-kumar')">
+                                    <i class="fas fa-user"></i> View Profile
+                                </button>
+                                <a href="/appointments" class="btn btn-secondary">
+                                    <i class="fas fa-calendar-plus"></i> Book Appointment
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 4 -->
+                    <div class="doctor-card" data-department="neurology,pediatrics">
+                        <div class="doctor-image">
+                            <i class="fas fa-user-doctor"></i>
+                        </div>
+                        <div class="doctor-info">
+                            <h3>Dr. Neha Singh</h3>
+                            <p class="specialization">Neurology & Pediatrics</p>
+                            <p class="experience">10+ years experience</p>
+                            <div class="doctor-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>MBBS, MD Neurology</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Tue-Sat: 11:00 AM - 7:00 PM</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-language"></i>
+                                    <span>English, Hindi, Bengali</span>
+                                </div>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-primary" onclick="showDoctorProfile('dr-singh')">
+                                    <i class="fas fa-user"></i> View Profile
+                                </button>
+                                <a href="/appointments" class="btn btn-secondary">
+                                    <i class="fas fa-calendar-plus"></i> Book Appointment
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Doctor 5 -->
+                    <div class="doctor-card" data-department="orthopedics">
+                        <div class="doctor-image">
+                            <i class="fas fa-user-doctor"></i>
+                        </div>
+                        <div class="doctor-info">
+                            <h3>Dr. Vikram Gupta</h3>
+                            <p class="specialization">Orthopedics</p>
+                            <p class="experience">14+ years experience</p>
+                            <div class="doctor-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>MBBS, MS Orthopedics</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Mon-Thu: 9:00 AM - 3:00 PM</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-language"></i>
+                                    <span>English, Hindi, Punjabi</span>
+                                </div>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-primary" onclick="showDoctorProfile('dr-gupta')">
+                                    <i class="fas fa-user"></i> View Profile
+                                </button>
+                                <a href="/appointments" class="btn btn-secondary">
+                                    <i class="fas fa-calendar-plus"></i> Book Appointment
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emergency Information -->
+            <section class="emergency-info">
+                <div class="card">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Emergency Services</h2>
+                    <p>For medical emergencies, call <strong>108</strong> or visit our emergency department.</p>
+                    <p>Our emergency services are available 24/7 with expert medical staff ready to help.</p>
+                </div>
+            </section>
+        </main>
+
         <footer>
-            <!-- ...footer content unchanged... -->
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-hospital"></i> Arogya Connect</h4>
+                    <p>Smart healthcare with AI-powered disease prediction</p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-clock"></i> Emergency</h4>
+                    <p>24/7 Emergency Services</p>
+                    <p><strong>Call: 108</strong></p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-envelope"></i> Contact</h4>
+                    <p>info@arogyaconnect.com</p>
+                    <p>+91-123-456-7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Arogya Connect. Powered by Machine Learning.</p>
+            </div>
         </footer>
     </div>
 
