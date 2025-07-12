@@ -6,6 +6,7 @@ A simple Flask web app for disease prediction based on symptoms using ML models.
 from flask import Flask, render_template, request, jsonify
 import joblib
 import numpy as np
+import pandas as pd
 from statistics import mode
 import os
 
@@ -62,12 +63,13 @@ def predict_disease_from_symptoms(selected_symptoms):
         if not valid_symptoms:
             return {"error": "No valid symptoms found. Please select valid symptoms."}
         
-        # Reshape for prediction
-        input_data = np.array(input_data).reshape(1, -1)
+        # Create DataFrame with proper feature names for prediction
+        feature_names = [symptom for symptom in symptom_index.keys()]
+        input_df = pd.DataFrame([input_data], columns=feature_names)
         
         # Get predictions from both models
-        rf_pred = encoder.classes_[rf_model.predict(input_data)[0]]
-        nb_pred = encoder.classes_[nb_model.predict(input_data)[0]]
+        rf_pred = encoder.classes_[rf_model.predict(input_df)[0]]
+        nb_pred = encoder.classes_[nb_model.predict(input_df)[0]]
         
         # Ensemble prediction (majority vote)
         final_pred = mode([rf_pred, nb_pred])
