@@ -1,5 +1,6 @@
 import joblib
 import numpy as np
+import pandas as pd
 from statistics import mode
 from collections import Counter
 import random
@@ -27,10 +28,12 @@ def predict_disease(input_symptoms: str):
     if not found_symptom:
         return {"Error": "No valid symptoms provided."}
 
-    input_data = np.array(input_data).reshape(1, -1)
+    # Create DataFrame with proper feature names for prediction
+    feature_names = [symptom for symptom in symptom_index.keys()]
+    input_df = pd.DataFrame([input_data], columns=feature_names)
 
-    rf_pred = encoder.classes_[rf_model.predict(input_data)[0]]
-    nb_pred = encoder.classes_[nb_model.predict(input_data)[0]]
+    rf_pred = encoder.classes_[rf_model.predict(input_df)[0]]
+    nb_pred = encoder.classes_[nb_model.predict(input_df)[0]]
     final_pred = mode([rf_pred, nb_pred])
 
     return {
